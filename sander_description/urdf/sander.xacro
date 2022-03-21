@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<robot name="sander" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find sander_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find sander_description)/urdf/sander.trans" />
+<xacro:include filename="$(find sander_description)/urdf/sander.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.02575854113896432 0.0674452387292379 1.8171533751102836e-17"/>
+    <mass value="1.5074343299628055"/>
+    <inertia ixx="0.001771" ixy="0.0" ixz="0.0" iyy="0.003446" iyz="0.0" izz="0.001771"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://sander_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver_default"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://sander_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="rotor_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-4.588610676113658e-07 -0.029741689185755874 7.65931719005647e-15"/>
+    <mass value="5.404977646600705"/>
+    <inertia ixx="0.009297" ixy="0.0" ixz="-0.0" iyy="0.017373" iyz="-0.0" izz="0.009297"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.025759 -0.058672 -0.0"/>
+    <geometry>
+      <mesh filename="package://sander_description/meshes/rotor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver_default"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.025759 -0.058672 -0.0"/>
+    <geometry>
+      <mesh filename="package://sander_description/meshes/rotor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Rev1" type="continuous">
+  <origin rpy="0 0 0" xyz="0.025759 0.058672 0.0"/>
+  <parent link="base_link"/>
+  <child link="rotor_1"/>
+  <axis xyz="0.0 -1.0 -0.0"/>
+</joint>
+
+</robot>
